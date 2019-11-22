@@ -1,5 +1,6 @@
 import React from 'react';
 import QuoteBox from './QuoteBox'
+import './qbstyles.scss'
 
 
 function App() {

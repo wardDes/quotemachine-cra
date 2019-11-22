@@ -1,0 +1,64 @@
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    vertical-align: baseline;/*aligns awsesom fonts with text */
+    box-sizing: border-box;
+  }
+
+  body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  .App {
+    border: 1px solid blue;
+    background: #eee;
+    width: 480;
+    border-radius: 5px;
+  }
+
+
+#quote-box {
+  display: flex;
+  flex-direction: column;
+  margin: 25px;
+}
+
+.text-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 400px;
+  word-wrap: normal;
+}
+
+.author-container {
+  display: flex;
+  justify-content: flex-end
+}
+
+.button-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+
+#text, #author {
+  font-weight: bold;
+  font-size: 1.5em;
+  font-style: Helvetica, sans-serif
+}
+
+#text {
+  text-align: center;
+}
+
+#author {
+  font-weight: bold;
+  font-size: 1em;
+  font-style: Helvetica, sans-serif
+}
