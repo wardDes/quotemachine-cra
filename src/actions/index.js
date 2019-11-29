@@ -1,19 +1,25 @@
-import { CHANGE_COLOR, CHANGE_QUOTE, CHANGE_AUTHOR} from '../constants/action-types'
+import C from '../constants/action-types'
 
 
 
-export const changeQuote = (quote) =>({
-    type: CHANGE_QUOTE,
-    quote,
-})
+export const quoteAuthor = (state="", action) => {
+    switch(action.type){
+        case C.CHANGE_QUOTEOBJ:
+            return {
+                quote: action.quote,
+                author: action.author
+            }
+        default: return state
+    }
+}
 
-export const changeAuthor = (author) =>({
-    type: CHANGE_AUTHOR,
-    author,
-})
+export const color = (state="", action) => {
+    switch(action.type){
+        case C.CHANGE_COLOR:
+            return {
+                color: action.color
+            }
+        default: return state
+    }
+}
 
-
-export const changeColor = (color) => ({
-    type: CHANGE_COLOR,
-    color
-})

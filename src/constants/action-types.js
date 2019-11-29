@@ -1,10 +1,6 @@
-
-export const CHANGE_QUOTE =  "CHANGE_QUOTE"
-export const CHANGE_COLOR = "CHANGE_COLOR"
-export const CHANGE_AUTHOR = "CHANGE_AUTHOR"
-
-export default {
-    CHANGE_COLOR,
-    CHANGE_QUOTE,
-    CHANGE_AUTHOR
+const constants = {
+    CHANGE_QUOTE_AUTHOR = "CHANGE_QUOTE_AUTHOR",
+    CHANGE_COLOR = "CHANGE_COLOR"
 }
+
+export default constants
