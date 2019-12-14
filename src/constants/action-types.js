@@ -1,5 +1,4 @@
-export const CHANGE_QUOTE = "CHANGE_QUOTE"
-export const CHANGE_AUTHOR =  "CHANGE_AUTHOR"
 export const CHANGE_COLOR = "CHANGE_COLOR"
+export const CHANGE_QUOTEOBJ = "CHANGE_QUOTEOBJ"
 
 
