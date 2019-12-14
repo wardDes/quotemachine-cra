@@ -1,8 +1,8 @@
 import { createStore, combineReducers } from 'redux'
-import {quote, author, color } from '../reducers/index.js'
+import { color, quoteObj } from '../reducers/index.js'
 
 
-const store = createStore(combineReducers({quote, author, color}),
+const store = createStore(combineReducers({ color, quoteObj}),
      window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__())
 
 export default store
