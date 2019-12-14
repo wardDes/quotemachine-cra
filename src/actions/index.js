@@ -1,4 +1,4 @@
-import {CHANGE_COLOR, CHANGE_QUOTE, CHANGE_AUTHOR} from '../constants/action-types'
+import {CHANGE_COLOR, CHANGE_QUOTEOBJ} from '../constants/action-types'
 
 
 export const changeColor = (color) => ({
@@ -6,12 +6,9 @@ export const changeColor = (color) => ({
     color
 })
 
-export const changeQuote = (quote) => ({
-    type: CHANGE_QUOTE,
-    quote
-})
 
-export const changeAuthor = (author) => ({
-    type: CHANGE_AUTHOR,
-    author
+
+export const changeQuoteObj = (quoteObj) => ({
+    type: CHANGE_QUOTEOBJ,
+    quoteObj
 })
