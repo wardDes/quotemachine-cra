@@ -1,8 +1,12 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { PropTypes } from 'prop-types'
 import './qbstyles.scss'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { fab } from '@fortawesome/free-brands-svg-icons'
 import { faQuoteLeft } from '@fortawesome/free-solid-svg-icons'
+import {changeColor, changeQuoteObj} from './actions/index'
+
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
@@ -16,9 +20,6 @@ export class QuoteBox extends Component {
         this.state = {
             quotes: [],
             quoteObj: {},
-            quote: "",
-            author: "",
-            color: "",
             colorBackground: [
                 "#23f83b",
                 "#84c828",
@@ -38,60 +39,61 @@ export class QuoteBox extends Component {
         }
 
         this.handleClick = this.handleClick.bind(this)
+        this.quoteObjChange = this.quoteObjChange.bind(this)
         this.colorChange = this.colorChange.bind(this)
-        this.quoteAndAuthor = this.quoteAndAuthor.bind(this)
         this.setBgBd = this.setBgBd.bind(this)
 
     }
 
     handleClick = () => {
+        this.quoteObjChange()
         this.colorChange();
-        this.quoteAndAuthor();
     }
 
+    quoteObjChange = (state) => {
+        const quoteObj = this.state.quotes[Math.floor(Math.random() * this.state.quotes.length)]
+        this.props.newQuoteObj(quoteObj)
+    }
+    
 
     colorChange = (state)=> {
-        const color = this.state.colorBackground[Math.floor((Math.random() * ((this.state.colorBackground).length)))]
-        this.setState({...state, color: color})
-        
+        const color = this.state.colorBackground[Math.floor(Math.random() * this.state.colorBackground.length)]
+        this.props.newColor(color)
     }
 
-    quoteAndAuthor = (state) => {
-        this.setState({quote: this.state.quoteObj.quote, author: this.state.quoteObj.author})
-        this.setState({quoteObj: this.state.quotes[0][Math.floor(Math.random() * this.state.quotes[0].length)]});
-    }
 
-    setBgBd = (state) =>{
+    setBgBd = (color) =>{
         let bodyBg = document.querySelector('body')
-        bodyBg.style.background = this.state.color;
-        bodyBg.style.borderColor = this.state.color;
+        bodyBg.style.background = color;
+        bodyBg.style.borderColor = color;
     }
-
-
-    buildQuotes = (data) =>{
-        this.setState({quotes: [].concat(Object.values(data))});
-        this.setState({quoteObj: this.state.quotes[0][Math.floor(Math.random() * this.state.quotes[0].length)]});
-        this.setState({quote: this.state.quoteObj.quote, author: this.state.quoteObj.author})
-    }
-
-
 
 
     componentDidMount() {
-        console.log('didmount');
         const url = 'https://gist.githubusercontent.com/camperbot/5a022b72e96c4c9585c32bf6a75f62d9/raw/e3c6895ce42069f0ee7e991229064f167fe8ccdc/quotes.json';
         fetch(url)
             .then(response => response.json())
-            .then(this.buildQuotes)
-            .then(this.colorChange)
-            .then(this.quoteAndAuthor)
+            .then(response => {
+                this.setState({
+                    quotes: response.quotes,
+                })
+            })
             .catch(err => console.log(err))
+            .finally(this.handleClick)
     }
 
+    static propTypes = {
+        quoteObj: PropTypes.object.isRequired,
+        color: PropTypes.string.isRequired
+    }
 
     render(){
-        const { quote, author, color} = this.state
-        this.setBgBd()
+        const quoteObj= this.props.quoteObj
+        const { quote, author } = quoteObj
+        const color = this.props.color
+        if(quote !== null){
+            this.setBgBd(color)
+        }
         return (
             <div id="quote-box">
                 <div className="text-container">
@@ -111,6 +113,28 @@ export class QuoteBox extends Component {
     }
 }
 
+const mapStateToProps = (state) => {
+    return {
+         quoteObj: state.quoteObj,
+         color: state.color
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        newQuoteObj: (quoteObj) => {
+            dispatch(changeQuoteObj(quoteObj))
+        },
+        newColor: (color) => {
+            dispatch(changeColor(color))
+        }
+    }
+}
+
+const QuoteMachine = connect(
+    mapStateToProps,
+    mapDispatchToProps
+)(QuoteBox)
 
 
-export default QuoteBox
+export default QuoteMachine
