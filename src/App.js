@@ -1,12 +1,12 @@
 import React from 'react';
-import QuoteBox from './QuoteBox'
+import QuoteMachine from './QuoteBox'
 import './qbstyles.scss'
 
 
 function App() {
   return (
     <div className="App">
-      <QuoteBox />
+      <QuoteMachine />
     </div>
   );
 }
