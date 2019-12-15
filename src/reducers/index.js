@@ -3,7 +3,7 @@ import { CHANGE_COLOR, CHANGE_QUOTEOBJ} from '../constants/action-types'
 
 
 
-export const color = (state=null, action) => {
+export const color = (state="", action) => {
     switch(action.type){
         case CHANGE_COLOR:
             return action.color
@@ -11,7 +11,7 @@ export const color = (state=null, action) => {
     }
 }
 
-export const quoteObj = (state=null, action) => {
+export const quoteObj = (state={}, action) => {
     switch(action.type){
         case CHANGE_QUOTEOBJ:
             return action.quoteObj
